@@ -46,7 +46,7 @@ def interactive_polygon_tool(image_path):
     return polygon_points
 
 # Example usage
-image_path = "test4.jpeg"  # Replace with your image path
+image_path = "images/test4.jpeg"  # Replace with your image path
 polygon_coordinates = interactive_polygon_tool(image_path)
 
 # Output the polygon coordinates

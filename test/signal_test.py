@@ -6,20 +6,20 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace with the path to your trained YOLOv8 model
 
 # Load the input image
-image_path = "test4.jpeg"
+image_path = "images/test4.jpeg"
 image = cv2.imread(image_path)
 
-# Run YOLOv8 inference
+# Run YOLOv8 inferencea
 results = model(image)
 detections = results[0].boxes.data.tolist()  # List of bounding boxes: [x1, y1, x2, y2, confidence, class_id]
 
 # Define lane areas as polygons (manually adjusted based on camera angle)
 lanes = {
-    "north": np.array([(262, 320), (459, 360), (477, 154), (419, 161), (259, 319)]),  # Top center lane
-    "south": np.array([(7, 435), (375, 423), (316, 633), (12, 630), (4, 438)]),  # Bottom center lane
-    "east": np.array([(481, 279), (594, 469), (634, 467), (635, 287), (483, 278)]),  # Right lane
-    "west": np.array([(44, 406), (178, 312), (38, 222), (4, 264), (43, 407)]),  # Left lane
-}
+        "north": np.array([(258, 329), (421, 152), (463, 149), (454, 350), (259, 331)]),  # Top center lane
+        "south": np.array([(7, 435), (375, 423), (316, 633), (12, 630), (4, 438)]),  # Bottom center lane
+        "east": np.array([(630, 366), (565, 561), (634, 582), (632, 371)]),  # Right lane
+        "west": np.array([(42, 427), (184, 306), (18, 221), (3, 234), (41, 425)]),  # Left lane
+    }
 # lanes = {
 #     "north": np.array([(214, 266), (391, 260), (247, 15), (186, 26), (215, 266)]),  # Top center lane
 #     "south": np.array([(7, 435), (375, 423), (316, 633), (12, 630), (4, 438)]),  # Bottom center lane

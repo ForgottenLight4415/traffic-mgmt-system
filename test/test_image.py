@@ -5,7 +5,7 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your YOLOv8 model
 
 # Path to the test image
-image_path = "test4.jpeg"  # Replace with your image file path
+image_path = "images/test4.jpeg"  # Replace with your image file path
 
 # Read the image
 image = cv2.imread(image_path)
