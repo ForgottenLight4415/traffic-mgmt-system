@@ -5,7 +5,7 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your downloaded model file
 
 # Open the video file
-video_path = 'atrium_video.avi'  # Replace with the path to your input video file
+video_path = '../test/atrium_video.avi'  # Replace with the path to your input video file
 cap = cv2.VideoCapture(video_path)
 
 # Get video properties
@@ -13,7 +13,7 @@ fps = int(cap.get(cv2.CAP_PROP_FPS))
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Codec for .avi output
-out = cv2.VideoWriter('output_video.avi', fourcc, fps, (width, height))
+out = cv2.VideoWriter('../test/output_video.avi', fourcc, fps, (width, height))
 
 # Process the video frame by frame
 while cap.isOpened():
