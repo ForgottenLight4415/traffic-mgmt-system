@@ -144,4 +144,4 @@ def calculate_signals(image):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
-#curl -X POST -F "file=@test/test4.jpeg" http://127.0.0.1:5000/process-image
+#curl -X POST -F "file=@test/images/test4.jpeg" http://127.0.0.1:5000/process-image
