@@ -5,7 +5,7 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your downloaded model file
 
 # Open the input video file
-video_path = 'emergency_test.mp4'  # Replace with the path to your input video file
+video_path = 'test2.mp4'  # Replace with the path to your input video file
 cap = cv2.VideoCapture(video_path)
 
 # Get video properties
