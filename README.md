@@ -4,6 +4,8 @@ Project Proposal: https://sites.google.com/view/ece-5554-group-seven-project/hom
 
 Google Colab: https://colab.research.google.com/drive/1i6OkipB5IgmMdbMjLeJyxVhBdE7F_qzU
 
+Datasets: https://www.kaggle.com/datasets/yusufberksardoan/traffic-detection-project
+
 Project Contributors:
 
 - Vishal Pednekar
