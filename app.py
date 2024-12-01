@@ -4,7 +4,11 @@ import numpy as np
 from flask import Flask, request, jsonify
 from ultralytics import YOLO
 
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
 
 # Directories for storing uploaded files
 UPLOAD_FOLDER = "uploads"
@@ -43,7 +47,7 @@ def upload_and_process_video():
 
         return jsonify({
             "message": "Video uploaded and processed successfully!",
-            "processed_file": f"{output_path}"
+            "processed_video_url": f"http://127.0.0.1:5001/processed/processed_{file.filename}"
         })
 
     except Exception as e:
@@ -140,6 +144,14 @@ def calculate_signals(image):
         "vehicle_counts": vehicle_counts
     }
     return response
+
+from flask import send_from_directory
+@app.route('/processed/<filename>')
+def serve_processed_video(filename):
+    """
+    Serve the processed video file for playback in the browser.
+    """
+    return send_from_directory(PROCESSED_FOLDER, filename)
 
 
 if __name__ == '__main__':
