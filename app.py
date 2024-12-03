@@ -156,5 +156,5 @@ def serve_processed_video(filename):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
-#curl -X POST -F "file=@test/images/test4.jpeg" http://127.0.0.1:5000/process-image
+#curl -X POST -F "file=@test/images/test_image_screen_2.jpeg" http://127.0.0.1:5001/process-image
 # curl -X POST -F "file=@test/test1.mp4" http://127.0.0.1:5001/upload

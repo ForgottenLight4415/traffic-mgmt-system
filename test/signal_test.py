@@ -6,7 +6,7 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace with the path to your trained YOLOv8 model
 
 # Load the input image
-image_path = "images/test4.jpeg"
+image_path = "test3.jpg"
 image = cv2.imread(image_path)
 
 # Run YOLOv8 inferencea
@@ -66,3 +66,5 @@ cv2.imwrite(output_path, image)
 # Print the lane with the green signal and vehicle counts
 print(f"Lane with green signal: {most_cars_lane}")
 print(f"Vehicle counts: {vehicle_counts}")
+
+#8 images

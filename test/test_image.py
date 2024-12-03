@@ -5,7 +5,7 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your YOLOv8 model
 
 # Path to the test image
-image_path = "images/test4.jpeg"  # Replace with your image file path
+image_path = "images/east.jpeg"  # Replace with your image file path
 
 # Read the image
 image = cv2.imread(image_path)
@@ -13,19 +13,34 @@ image = cv2.imread(image_path)
 # Run YOLOv8 inference
 results = model(image)
 
-# Print detection results
-print("Detections:")
+# Vehicle classes (modify as needed)
+vehicle_classes = ['car', 'bus', 'truck', 'motorbike']
+vehicle_count = {vehicle: 0 for vehicle in vehicle_classes}
+
+# Annotate and count detections
 for box in results[0].boxes.data.tolist():  # Iterate through detected objects
     x1, y1, x2, y2, conf, cls = box
-    print(f"Class: {model.names[int(cls)]}, Confidence: {conf:.2f}, Box: [{x1:.0f}, {y1:.0f}, {x2:.0f}, {y2:.0f}]")
+    conf = float(conf)
+    cls_name = model.names[int(cls)]
 
-# Draw the results on the image
-annotated_image = results[0].plot()
+    if conf > 0.6:  # Only consider detections with confidence > 60%
+        if cls_name in vehicle_classes:  # Count only specified vehicle classes
+            vehicle_count[cls_name] += 1
+
+        # Draw bounding box and label on the image
+        cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+        cv2.putText(image, f"{cls_name} {conf:.2f}", (int(x1), int(y1) - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+# Print detection results
+print("Detections:")
+for vehicle, count in vehicle_count.items():
+    print(f"{vehicle}: {count}")
 
 # Show the annotated image
-cv2.imshow("YOLOv8 Detection", annotated_image)
+cv2.imshow("YOLOv8 Detection", image)
 cv2.waitKey(0)  # Wait for a key press to close the image window
 cv2.destroyAllWindows()
 
 # Optional: Save the annotated image
-cv2.imwrite("annotated_image.jpg", annotated_image)
+cv2.imwrite("images/final/model_image.jpg", image)

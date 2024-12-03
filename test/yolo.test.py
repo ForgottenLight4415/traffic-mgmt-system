@@ -2,10 +2,13 @@ import cv2
 from ultralytics import YOLO
 
 # Load the YOLOv8 model
-model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your downloaded model file
+model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your trained YOLOv8 model
+
+# Define a confidence threshold
+CONFIDENCE_THRESHOLD = 0.5
 
 # Open the input video file
-video_path = 'test2.mp4'  # Replace with the path to your input video file
+video_path = 'test_virginia.mp4'  # Replace with the path to your input video file
 cap = cv2.VideoCapture(video_path)
 
 # Get video properties
@@ -24,8 +27,17 @@ while cap.isOpened():
     # Run YOLOv8 inference on the frame
     results = model(frame)
 
-    # Annotate the frame with detection results
-    annotated_frame = results[0].plot()  # Add bounding boxes and labels to the frame
+    # Filter detections based on confidence threshold
+    filtered_boxes = []
+    for box in results[0].boxes.data:  # YOLOv8 boxes data
+        if box[4] >= CONFIDENCE_THRESHOLD:  # Confidence threshold check
+            filtered_boxes.append(box)
+
+    # Replace the original boxes with the filtered ones
+    results[0].boxes.data = filtered_boxes
+
+    # Annotate the frame with detection results using YOLO's `plot()`
+    annotated_frame = results[0].plot()
 
     # Write the annotated frame to the output video
     out.write(annotated_frame)
