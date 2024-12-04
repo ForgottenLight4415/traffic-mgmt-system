@@ -15,10 +15,10 @@ detections = results[0].boxes.data.tolist()  # List of bounding boxes: [x1, y1, 
 
 # Define lane areas as polygons (manually adjusted based on camera angle)
 lanes = {
-        "north": np.array([(258, 329), (421, 152), (463, 149), (454, 350), (259, 331)]),  # Top center lane
-        "south": np.array([(7, 435), (375, 423), (316, 633), (12, 630), (4, 438)]),  # Bottom center lane
-        "east": np.array([(630, 366), (565, 561), (634, 582), (632, 371)]),  # Right lane
-        "west": np.array([(42, 427), (184, 306), (18, 221), (3, 234), (41, 425)]),  # Left lane
+        "north": np.array([(212, 263), (385, 252), (243, 10), (189, 25), (214, 257)]),  # Top center lane
+        "south": np.array([(4, 553), (365, 547), (321, 632), (6, 627), (4, 555)]),  # Bottom center lane
+        "east": np.array([(515, 289), (608, 472), (635, 470), (636, 283), (518, 288)]),  # Right lane
+        "west": np.array([(3, 427), (18, 275), (4, 271), (4, 424)]),  # Left lane
     }
 # lanes = {
 #     "north": np.array([(214, 266), (391, 260), (247, 15), (186, 26), (215, 266)]),  # Top center lane

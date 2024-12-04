@@ -5,10 +5,10 @@ from ultralytics import YOLO
 model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your trained YOLOv8 model
 
 # Define a confidence threshold
-CONFIDENCE_THRESHOLD = 0.5
+CONFIDENCE_THRESHOLD = 0.91
 
 # Open the input video file
-video_path = 'test_virginia.mp4'  # Replace with the path to your input video file
+video_path = 'emergency_test.mp4'  # Replace with the path to your input video file
 cap = cv2.VideoCapture(video_path)
 
 # Get video properties
@@ -16,7 +16,7 @@ fps = int(cap.get(cv2.CAP_PROP_FPS))
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec for MP4 output
-out = cv2.VideoWriter('output_video.mp4', fourcc, fps, (width, height))
+out = cv2.VideoWriter('emergency_test_output.mp4', fourcc, fps, (width, height))
 
 # Process the video frame by frame
 while cap.isOpened():

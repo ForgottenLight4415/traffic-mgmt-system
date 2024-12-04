@@ -63,7 +63,7 @@ def is_inside_polygon(point, polygon):
 model = YOLO('../best.pt')  # Replace 'best.pt' with the path to your YOLOv8 model
 
 # Path to the test image
-image_path = "images/north.jpeg"  # Replace with your image path
+image_path = "test3.jpg"  # Replace with your image path
 
 # Step 1: Select AOI using the interactive tool
 polygon_coordinates = interactive_polygon_tool(image_path)
