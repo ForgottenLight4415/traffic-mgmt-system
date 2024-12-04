@@ -39,6 +39,56 @@ os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 # Load YOLO model
 model = YOLO('best.pt')  # Replace with your trained YOLOv8 model path
 
+### 1. Endpoint: Upload and Process Video ###
+@app.route('/upload', methods=['POST'])
+def upload_and_process_video():
+    """
+    Endpoint to upload a video, process it using YOLOv8, and save the processed video.
+    """
+    try:
+        if 'file' not in request.files:
+            return jsonify({"error": "No file provided"}), 400
+
+        file = request.files['file']
+
+        if file.filename == '':
+            return jsonify({"error": "No file selected"}), 400
+
+        input_path = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(input_path)
+
+        output_path = os.path.join(PROCESSED_FOLDER, f"processed_{file.filename}")
+        process_video_with_yolo(input_path, output_path)
+
+        return jsonify({
+            "message": "Video uploaded and processed successfully!",
+            "processed_video_url": f"http://127.0.0.1:5001/processed/processed_{file.filename}"
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+def process_video_with_yolo(input_path, output_path):
+    cap = cv2.VideoCapture(input_path)
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        results = model(frame)
+        annotated_frame = results[0].plot()
+        out.write(annotated_frame)
+
+    cap.release()
+    out.release()
+
 ### Endpoint to Process Images with AOI ###
 @app.route('/upload-images', methods=['POST'])
 def upload_images_and_process_aoi():
