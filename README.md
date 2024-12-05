@@ -7,8 +7,9 @@ An innovative project utilizing AI to analyze traffic density and dynamically ad
 ## Project Links
 
 - **Project Proposal**: [View Proposal](https://sites.google.com/view/ece-5554-group-seven-project/home)
-- **Google Colab Notebook**: [View Colab](https://colab.research.google.com/drive/1i6OkipB5IgmMdbMjLeJyxVhBdE7F_qzU)
-
+- **Google Colab Notebook**: 
+[YOLO Colab](https://colab.research.google.com/drive/15EgZ3FuKXhu9c5U31S_-61qRHBZyYgc5?usp=sharing)
+[Dataset Merge](https://colab.research.google.com/drive/1-rQLeNdoRWvtUIyYaqQpPt9EgigMLHIG?usp=sharing)
 ---
 
 ## Project Contributors
